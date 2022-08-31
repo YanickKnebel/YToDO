@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>to do list</title>
+  </head>
+  <body>
+    <div class="dropdown">
+      <button class="button">
+        <img
+          onclick="myFunction()"
+          class="dropbtn"
+          class="icon-menu"
+          src="img/Burger-menu-item 2.png"
+          alt="Burger-menu-item"
+        />
+      </button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="index.html">Home</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3 </a>
+      </div>
+    </div>
+    <selection class="container">
+      <div class="greeting">
+        <h3 id="salutation">Guten Morgen</h3>
+        <p>Du hast noch einiege aufgaben zu erledigen.</p>
+      </div>
+      <div class="list">
+        <template><section></section></template>
+      </div>
+      <container class="todolist">
+        <template>
+          <section class="todo-header">
+            <h1>
+              To-Do-Liste vom <span class="dayShift">day</span> dem
+              <!-- day shift aus tausch durch datums funktion -->
+              <span> xx.xx.xxxx</span>
+            </h1>
+            <hr id="separator" />
+          </section>
+          <section class="todo-selection"></section>
+          <section class="todo-task"></section>
+        </template>
+      </container>
+      <!-- <div class="calendar">
+        calendar
+      </div> -->
+    </selection>
+
+    <footer class="footer">
+      © 2022
+      <p>work and progress</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
