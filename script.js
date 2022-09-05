@@ -16,6 +16,7 @@ if (hour > afternoon) {
   greeting = "Guten Abend";
 }
 console.log(greeting);
+console.log(document);
 const salutation_element = document.getElementById("salutation");
 console.log(salutation_element);
 salutation_element.textContent = greeting;
@@ -87,19 +88,23 @@ function getKW(date) {
   date.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
   date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+  console.log(date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7)));
   // January 4 is always in week 1.
   var week1 = new Date(date.getFullYear(), 0, 4);
   // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+  console.log((date.getTime() - week1.getTime()) / 86400000);
+
   return (
     1 +
     Math.round(
       ((date.getTime() - week1.getTime()) / 86400000 -
         3 +
-        ((week1.getDay() + 6) % 7)) /
+        ((week1.getDay() + 6) % 7)) / //rechnung zum donnerstag
         7
     )
   );
 }
+console.log("test", getKW(new Date(2022, 0, 4)));
 console.log("die aktuelle Kalender Woche " + getKW(aktuelle));
 
 function getMonday(d) {
@@ -127,3 +132,9 @@ function getKWdates(date) {
   return [monday, tuesday, wensday, thursday, friday];
 }
 console.log(getKWdates(aktuelle));
+const week = getKWdates(aktuelle);
+for (let i = 0; i < week.length; i++) {
+  const element = week[i];
+  console.log(element);
+  getElementsByClassName(tamplte);
+}
