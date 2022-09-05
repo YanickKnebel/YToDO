@@ -80,3 +80,50 @@ for (i = 0; i < Start.length; i++) {
 //   console.log("click");
 //   Ziel.textContent = "Monday";
 // });
+
+const aktuelle = new Date();
+
+function getKW(date) {
+  date.setHours(0, 0, 0, 0);
+  // Thursday in current week decides the year.
+  date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
+  // January 4 is always in week 1.
+  var week1 = new Date(date.getFullYear(), 0, 4);
+  // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+  return (
+    1 +
+    Math.round(
+      ((date.getTime() - week1.getTime()) / 86400000 -
+        3 +
+        ((week1.getDay() + 6) % 7)) /
+        7
+    )
+  );
+}
+console.log("die aktuelle Kalender Woche " + getKW(aktuelle));
+
+function getMonday(d) {
+  d = new Date(d);
+  var day = d.getDay(),
+    diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+}
+
+function getKWdates(date) {
+  const monday = getMonday(date);
+
+  const tuesday = new Date(monday);
+  tuesday.setDate(tuesday.getDate() + 1);
+
+  const wensday = new Date(monday);
+  wensday.setDate(wensday.getDate() + 2);
+
+  const thursday = new Date(monday);
+  thursday.setDate(thursday.getDate() + 3);
+
+  const friday = new Date(monday);
+  friday.setDate(friday.getDate() + 4);
+
+  return [monday, tuesday, wensday, thursday, friday];
+}
+console.log(getKWdates(aktuelle));
