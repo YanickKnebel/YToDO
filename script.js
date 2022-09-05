@@ -138,3 +138,5 @@ for (let i = 0; i < week.length; i++) {
   console.log(element);
   getElementsByClassName(tamplte);
 }
+
+console.log("hi from playground branch! :)");
