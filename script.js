@@ -16,7 +16,7 @@ if (hour > afternoon) {
   greeting = "Guten Abend";
 }
 console.log(greeting);
-console.log(document);
+
 const salutation_element = document.getElementById("salutation");
 console.log(salutation_element);
 salutation_element.textContent = greeting;
@@ -115,20 +115,24 @@ function getMonday(d) {
 }
 
 function getKWdates(date) {
-  const monday = getMonday(date);
+  const monday = getMonday(date); //.toLocaleString("de-de", { weekday: "short" });
 
-  const tuesday = new Date(monday);
+  const tuesday = new Date(monday); //.toLocaleString("de-de", {
+  //weekday: "short",})
   tuesday.setDate(tuesday.getDate() + 1);
 
-  const wensday = new Date(monday);
+  const wensday = new Date(monday); //.toLocaleString("de-de", {
+  //weekday: "short",})
   wensday.setDate(wensday.getDate() + 2);
 
   const thursday = new Date(monday);
+  //.toLocaleString("de-de", {weekday: "short",})
   thursday.setDate(thursday.getDate() + 3);
 
   const friday = new Date(monday);
+  //.toLocaleString("de-de", { weekday: "short" });
   friday.setDate(friday.getDate() + 4);
-
+  console.log(friday);
   return [monday, tuesday, wensday, thursday, friday];
 }
 console.log(getKWdates(aktuelle));
@@ -136,5 +140,10 @@ const week = getKWdates(aktuelle);
 for (let i = 0; i < week.length; i++) {
   const element = week[i];
   console.log(element);
-  getElementsByClassName(tamplte);
+  const buttonWeekdayTemplate = document.getElementsByClassName(buttonWeekday);
+  const cloneContent = buttonWeekdayTemplate.content
+    .cloneNode(true)
+    .querySelector("section");
+  week;
+  document.querySelector("div.List").appendChild(cloneContent);
 }
