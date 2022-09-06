@@ -44,44 +44,6 @@ console.log(Ziel);
 let Start = document.querySelectorAll(".list section");
 console.log(typeof Start);
 
-// Start.addEventListener("click", () => {
-//   console.log("click");
-//   Ziel.textContent = "Monday";
-// });
-
-for (i = 0; i < Start.length; i++) {
-  // console.log(Start[i]);
-  let zielText = "";
-  switch (i) {
-    case 0:
-      zielText = "Montag";
-      break;
-    case 1:
-      zielText = "Dienstag";
-      break;
-    case 2:
-      zielText = "Mitwoch";
-      break;
-    case 3:
-      zielText = "Donnerstag";
-      break;
-    case 4:
-      zielText = "Freitag Yeahh";
-      break;
-    default:
-      zielText = "String ERROR";
-  }
-  Start[i].addEventListener("click", () => {
-    //Active class
-    Ziel.textContent = zielText;
-  });
-}
-
-// Start.addEventListener("click", () => {
-//   console.log("click");
-//   Ziel.textContent = "Monday";
-// });
-
 const aktuelle = new Date();
 
 function getKW(date) {
@@ -140,12 +102,120 @@ const week = getKWdates(aktuelle);
 for (let i = 0; i < week.length; i++) {
   const element = week[i];
   console.log(element);
-  const buttonWeekdayTemplate = document.getElementsByClassName(buttonWeekday);
+  const buttonWeekdayTemplate =
+    document.getElementsByClassName("buttonWeekday")[0];
   const cloneContent = buttonWeekdayTemplate.content
     .cloneNode(true)
     .querySelector("section");
   week;
-  document.querySelector("div.List").appendChild(cloneContent);
+  cloneContent.textContent = element.toLocaleString([], {
+    weekday: "short",
+  });
+  cloneContent.addEventListener("click", () => {
+    boardChange(element);
+  });
+  document.querySelector("div.list").appendChild(cloneContent);
 }
 
-console.log("hi from playground branch! :)");
+const boardChange = (date) => {
+  const weekdayBoardTemplate = document.querySelector("template.weekdayBoard");
+  const cloneWeekdayBoard = weekdayBoardTemplate.content.cloneNode(true);
+  cloneWeekdayBoard.querySelector("span.dayShift").textContent =
+    date.toLocaleString([], { weekday: "long" });
+  cloneWeekdayBoard.querySelector("span.dayShiftDate").textContent =
+    date.toLocaleString([], {
+      month: "short",
+      year: "numeric",
+      day: "2-digit",
+    });
+
+  const container = document.querySelector("container.todolist");
+  container.appendChild(cloneWeekdayBoard);
+};
+
+const data = [
+  [
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+  ],
+  [
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+    {
+      date: new Date(2022, 08, 18),
+      todos: [
+        { todo: "", done: false },
+        { todo: "", done: false },
+        { todo: "", done: false },
+      ],
+    },
+  ],
+];
