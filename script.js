@@ -147,3 +147,5 @@ for (let i = 0; i < week.length; i++) {
   week;
   document.querySelector("div.List").appendChild(cloneContent);
 }
+
+console.log("hi from playground branch! :)");
