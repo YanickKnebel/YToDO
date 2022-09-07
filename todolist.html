@@ -32,28 +32,25 @@
         <template class="buttonWeekday"><section></section></template>
       </div>
       <container class="todolist">
-        <template class="weekdayBoard">
-          <section class="todo-header">
-            <h1>
-              To-Do-Liste vom <span class="dayShift"></span> dem
-              <!-- day shift aus tausch durch datums funktion -->
-              <span class="dayShiftDate"></span>
-            </h1>
-            <hr id="separator" />
-          </section>
-          <section class="todo-selection"></section>
-          <section class="todo-task"></section>
-        </template>
+        <section class="todo-header">
+          <h1>
+            To-Do-Liste vom <span class="dayShift"></span> dem
+            <!-- day shift aus tausch durch datums funktion -->
+            <span class="dayShiftDate"></span>
+          </h1>
+          <hr id="separator" />
+        </section>
+        <section class="text"></section>
+        <section class="todo-task"></section>
       </container>
       <!-- <div class="calendar">
         calendar
       </div> -->
     </selection>
-
-    <footer class="footer">
+    <!-- <footer class="footer">
       © 2022
       <p>work and progress</p>
-    </footer>
+    </footer> -->
     <script src="script.js"></script>
   </body>
 </html>

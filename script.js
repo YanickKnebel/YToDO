@@ -99,16 +99,40 @@ function getKWdates(date) {
 }
 console.log(getKWdates(aktuelle));
 const week = getKWdates(aktuelle);
-for (let i = 0; i < week.length; i++) {
-  const element = week[i];
-  console.log(element);
+
+const data = [
+  [
+    {
+      date: week[0],
+      content: "montag",
+    },
+    {
+      date: week[1],
+      content: "dienstag",
+    },
+    {
+      date: week[2],
+      content: "mitwoch",
+    },
+    {
+      date: week[3],
+      content: "donerstag",
+    },
+    {
+      date: week[4],
+      content: "freitag",
+    },
+  ],
+];
+const testWeek = data[0];
+for (let i = 0; i < testWeek.length; i++) {
+  const element = testWeek[i];
   const buttonWeekdayTemplate =
     document.getElementsByClassName("buttonWeekday")[0];
   const cloneContent = buttonWeekdayTemplate.content
     .cloneNode(true)
     .querySelector("section");
-  week;
-  cloneContent.textContent = element.toLocaleString([], {
+  cloneContent.textContent = element.date.toLocaleString([], {
     weekday: "short",
   });
   cloneContent.addEventListener("click", () => {
@@ -117,105 +141,18 @@ for (let i = 0; i < week.length; i++) {
   document.querySelector("div.list").appendChild(cloneContent);
 }
 
-const boardChange = (date) => {
-  const weekdayBoardTemplate = document.querySelector("template.weekdayBoard");
-  const cloneWeekdayBoard = weekdayBoardTemplate.content.cloneNode(true);
-  cloneWeekdayBoard.querySelector("span.dayShift").textContent =
-    date.toLocaleString([], { weekday: "long" });
-  cloneWeekdayBoard.querySelector("span.dayShiftDate").textContent =
-    date.toLocaleString([], {
-      month: "short",
-      year: "numeric",
-      day: "2-digit",
-    });
+const headline = document.querySelector("span.dayShift");
+const datum = document.querySelector("span.dayShiftDate");
+const text = document.querySelector("section.text");
 
-  const container = document.querySelector("container.todolist");
-  container.appendChild(cloneWeekdayBoard);
+const boardChange = (toDay) => {
+  headline.textContent = toDay.date.toLocaleString([], { weekday: "long" });
+  datum.textContent = toDay.date.toLocaleString([], {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+  text.textContent = toDay.content;
 };
 
-const data = [
-  [
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-  ],
-  [
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-    {
-      date: new Date(2022, 08, 18),
-      todos: [
-        { todo: "", done: false },
-        { todo: "", done: false },
-        { todo: "", done: false },
-      ],
-    },
-  ],
-];
+console.log(data[0][0].content);
