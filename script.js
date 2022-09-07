@@ -1,3 +1,6 @@
+//magic number
+const oneDayInMilliseconds = 886400000;
+
 // greeting
 let time = new Date();
 const hour = time.getHours();
@@ -27,8 +30,8 @@ function myFunction() {
 
 window.onclick = function (event) {
   if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+    let i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains("show")) {
@@ -44,61 +47,61 @@ console.log(Ziel);
 let Start = document.querySelectorAll(".list section");
 console.log(typeof Start);
 
-const aktuelle = new Date();
+const currentDay = new Date();
 
 function getKW(date) {
-  date.setHours(0, 0, 0, 0);
+  let day = date;
+  day.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
-  date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-  console.log(date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7)));
+  day.setDate(day.getDate() + 3 - ((day.getDay() + 6) % 7));
+  console.log(day.setDate(day.getDate() + 3 - ((day.getDay() + 6) % 7)));
   // January 4 is always in week 1.
-  var week1 = new Date(date.getFullYear(), 0, 4);
-  // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-  console.log((date.getTime() - week1.getTime()) / 86400000);
+  let week1 = new Date(day.getFullYear(), 0, 4);
+  // Adjust to Thursday in week 1 and count number of weeks from day to week1.
+  console.log((day.getTime() - week1.getTime()) / oneDayInMilliseconds);
 
   return (
     1 +
     Math.round(
-      ((date.getTime() - week1.getTime()) / 86400000 -
+      ((day.getTime() - week1.getTime()) / oneDayInMilliseconds -
         3 +
         ((week1.getDay() + 6) % 7)) / //rechnung zum donnerstag
         7
     )
   );
 }
-console.log("test", getKW(new Date(2022, 0, 4)));
-console.log("die aktuelle Kalender Woche " + getKW(aktuelle));
+
+console.log("die aktuelle Kalender Woche " + getKW(currentDay));
 
 function getMonday(d) {
+  //d=date
   d = new Date(d);
-  var day = d.getDay(),
+  let day = d.getDay(),
     diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-  return new Date(d.setDate(diff));
+  const newDate = new Date(d.setDate(diff));
+
+  return newDate;
 }
 
 function getKWdates(date) {
-  const monday = getMonday(date); //.toLocaleString("de-de", { weekday: "short" });
+  const monday = getMonday(date);
 
-  const tuesday = new Date(monday); //.toLocaleString("de-de", {
-  //weekday: "short",})
+  const tuesday = new Date(monday);
   tuesday.setDate(tuesday.getDate() + 1);
 
-  const wensday = new Date(monday); //.toLocaleString("de-de", {
-  //weekday: "short",})
+  const wensday = new Date(monday);
   wensday.setDate(wensday.getDate() + 2);
 
   const thursday = new Date(monday);
-  //.toLocaleString("de-de", {weekday: "short",})
   thursday.setDate(thursday.getDate() + 3);
 
   const friday = new Date(monday);
-  //.toLocaleString("de-de", { weekday: "short" });
   friday.setDate(friday.getDate() + 4);
-  console.log(friday);
+
   return [monday, tuesday, wensday, thursday, friday];
 }
-console.log(getKWdates(aktuelle));
-const week = getKWdates(aktuelle);
+console.log(getKWdates(currentDay));
+const week = getKWdates(currentDay);
 
 const data = [
   [
@@ -124,7 +127,8 @@ const data = [
     },
   ],
 ];
-const testWeek = data[0];
+console.log(week[0]);
+const testWeek = data[0]; // testWeek have not real content
 for (let i = 0; i < testWeek.length; i++) {
   const element = testWeek[i];
   const buttonWeekdayTemplate =
@@ -136,18 +140,18 @@ for (let i = 0; i < testWeek.length; i++) {
     weekday: "short",
   });
   cloneContent.addEventListener("click", () => {
-    boardChange(element);
+    onBoardChange(element);
   });
   document.querySelector("div.list").appendChild(cloneContent);
 }
 
 const headline = document.querySelector("span.dayShift");
-const datum = document.querySelector("span.dayShiftDate");
+const dateExit = document.querySelector("span.dayShiftDate");
 const text = document.querySelector("section.text");
 
-const boardChange = (toDay) => {
+const onBoardChange = (toDay) => {
   headline.textContent = toDay.date.toLocaleString([], { weekday: "long" });
-  datum.textContent = toDay.date.toLocaleString([], {
+  dateExit.textContent = toDay.date.toLocaleString([], {
     day: "2-digit",
     month: "long",
     year: "numeric",
