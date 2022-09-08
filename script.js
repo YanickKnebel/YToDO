@@ -28,8 +28,8 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-window.onclick = function (event) {
-  if (!event.target.matches(".dropbtn")) {
+window.onclick = function (Event) {
+  if (!Event.target.matches(".dropbtn")) {
     let dropdowns = document.getElementsByClassName("dropdown-content");
     let i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -50,7 +50,7 @@ console.log(typeof Start);
 const currentDay = new Date();
 
 function getKW(date) {
-  let day = date;
+  let day = new Date(date);
   day.setHours(0, 0, 0, 0);
   // Thursday in current week decides the year.
   day.setDate(day.getDate() + 3 - ((day.getDay() + 6) % 7));
@@ -70,7 +70,9 @@ function getKW(date) {
     )
   );
 }
-
+console.log("currentDay", currentDay);
+const hello = getKW(currentDay);
+console.log("currentDay", currentDay);
 console.log("die aktuelle Kalender Woche " + getKW(currentDay));
 
 function getMonday(d) {
@@ -78,9 +80,9 @@ function getMonday(d) {
   d = new Date(d);
   let day = d.getDay(),
     diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-  const newDate = new Date(d.setDate(diff));
+  const monday = new Date(d.setDate(diff));
 
-  return newDate;
+  return monday;
 }
 
 function getKWdates(date) {
@@ -160,7 +162,60 @@ const onBoardChange = (toDay) => {
 };
 
 console.log(data[0][0].content);
+//selector
+const todoInput = document.querySelector(".todo-input");
+const todoButton = document.querySelector(".todo-button");
+const todoUlList = document.querySelector(".todo-Ul-List");
+const filterTodo = document.querySelector(".filter-todo");
+//Eventlisener
+todoButton.addEventListener("click", addToDo);
+todoUlList.addEventListener("click", deleteCheck);
+filterOption.addEventListener("click", filterTodo);
+//funktion
+function addToDo(event) {
+  // prevent form from submiting
+  event.preventDefault();
+  //ToDO DIV
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+  // creat LI
+  const newTodo = document.createElement("li");
+  newTodo.innerText = todoInput.value;
+  newTodo.classList.add("todo-item");
+  todoDiv.appendChild(newTodo);
+  // Ceck MARK Button
+  const completedButton = document.createElement("button");
+  completedButton.innerHTML = '<i class="fas fa-check"></i>';
+  completedButton.classList.add("complete-btn");
+  todoDiv.appendChild(completedButton);
+  // Ceck Trash Button
+  const trashButton = document.createElement("button");
+  trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+  trashButton.classList.add("trash-btn");
+  todoDiv.appendChild(trashButton);
+  //Append to List
+  todoUlList.appendChild(todoDiv);
+  //clear toDo input  Value
+  todoInput.value = "";
+}
 
-const todoInput = document.querySelector(".todo-input");
-const todoInput = document.querySelector(".todo-input");
-const todoInput = document.querySelector(".todo-input");
+function deleteCheck(e) {
+  const item = e.target;
+  if (item.classList[0] === "trash-btn") {
+    const todo = item.parentElement;
+    //animation
+    todo.classList.add("fall");
+    todo.addEventListener("transitionend", function () {
+      todo.remove();
+    });
+  }
+  //check mark
+  if (item.classList[0]) {
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+  }
+}
+function filterTodo(e) {
+  const todos = todoUlList.childNodes;
+  console.log(todos);
+}
