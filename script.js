@@ -160,3 +160,7 @@ const onBoardChange = (toDay) => {
 };
 
 console.log(data[0][0].content);
+
+const todoInput = document.querySelector(".todo-input");
+const todoInput = document.querySelector(".todo-input");
+const todoInput = document.querySelector(".todo-input");

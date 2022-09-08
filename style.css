@@ -218,6 +218,30 @@ button img {
   margin-top: 20px;
   color: black;
 }
+.todo-task form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  background-color: var(--sub-col);
+}
+form button {
+  color: var(--main-col);
+  background-color: var(--sub-col);
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+form button:hover {
+  background-color: var(--main-col);
+  color: var(--sub-col);
+}
+
 .list {
   display: flex;
   justify-content: space-between;
