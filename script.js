@@ -145,52 +145,10 @@ data.forEach((day) => {
   buttonWeekdayTarget.appendChild(cloneContent);
 });
 
-// week.forEach((day) => {
-//   const buttonWeekdayTemplate =
-//     document.getElementsByClassName("buttonWeekday")[0];
-//   const cloneContent = buttonWeekdayTemplate.content
-//     .cloneNode(true)
-//     .querySelector("section");
-//   cloneContent.textContent = day.toLocaleString([], {
-//     weekday: "short",
-//   });
-//   cloneContent.addEventListener("click", () => {
-//     onBoardChange(day);
-//   });
-//   document.querySelector("div.list").appendChild(cloneContent);
-// });
-
-// for (let i = 0; i < testWeek.length; i++)
-//  {
-//   const element = testWeek[i];
-//   const buttonWeekdayTemplate =
-//     document.getElementsByClassName("buttonWeekday")[0];
-//   const cloneContent = buttonWeekdayTemplate.content
-//     .cloneNode(true)
-//     .querySelector("section");
-//   cloneContent.textContent = element.date.toLocaleString([], {
-//     weekday: "short",
-//   });
-//   cloneContent.addEventListener("click", () => {
-//     onBoardChange(element);
-//   });
-//   document.querySelector("div.list").appendChild(cloneContent);
-// }
-
 const headline = document.querySelector("span.dayShift");
 const dateExit = document.querySelector("span.dayShiftDate");
 const text = document.querySelector("section.text");
 
-// const onBoardChange = (toDay) => {
-//   const namenTag = toDay.toLocaleString([], { weekday: "long" });
-//   headline.textContent = namenTag;
-//   dateExit.textContent = toDay.toLocaleString([], {
-//     day: "2-digit",
-//     month: "long",
-//     year: "numeric",
-//   });
-//   text.textContent = namenTag;
-// };
 const onBoardChange = (toDay) => {
   const namenTag = toDay.toLocaleString([], { weekday: "long" });
   headline.textContent = namenTag;
@@ -222,24 +180,6 @@ function addToDo(event) {
   cloneContentTodoListTemplate.querySelector(".label").textContent =
     todoInput.value;
 
-  // //ToDO DIV
-  // const todoDiv = document.createElement("div");
-  // todoDiv.classList.add("todo");
-  // // creat LI
-  // const newTodo = document.createElement("li");
-  // newTodo.innerText = todoInput.value;
-  // newTodo.classList.add("todo-item");
-  // todoDiv.appendChild(newTodo);
-  // // Check MARK Button
-  // const completedButton = document.createElement("button");
-  // completedButton.innerHTML = '<i class="fas fa-check"></i>';
-  // completedButton.classList.add("complete-btn");
-  // todoDiv.appendChild(completedButton);
-  // // Check Trash Button
-  // const trashButton = document.createElement("button");
-  // trashButton.innerHTML = '<i class="fas fa-trash"></i>';
-  // trashButton.classList.add("trash-btn");
-  // todoDiv.appendChild(trashButton);
   //Append to List
   todoUlList.appendChild(cloneContentTodoListTemplate);
   //clear toDo input  Value
