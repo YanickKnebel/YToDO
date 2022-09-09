@@ -201,14 +201,12 @@ button img {
 .todolist {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  width: 440px;
+  width: 100%;
   background-color: white;
   border-radius: 25px;
   padding: 15px;
   max-height: 594px;
-  /* overflow: scroll;
-  overflow-x: hidden; */
+  overflow: scroll;
 }
 .todo-header {
   margin: 10px 0px 0px 10px;
@@ -251,22 +249,24 @@ form button:hover {
   align-items: center;
 }
 .todo-Ul-List {
+  display: flex;
   min-width: 60%;
   list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 }
 .todo {
+  display: flex;
   margin: 0.5rem;
   background-color: var(--sub-col);
   color: black;
   font-size: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   transition: all 0.3s ease;
-}
-.todo li {
   flex: 1;
+  padding: 0.5rem;
 }
+
 .trash-btn,
 .complete-btn {
   background-color: white;
@@ -303,7 +303,7 @@ form button:hover {
   opacity: 0.5;
 }
 .fall {
-  transform: translateY(8rem) rotateZ(20deg);
+  transform: translateY(8rem) rotate(20deg);
   opacity: 0;
 }
 select {

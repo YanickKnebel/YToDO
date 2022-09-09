@@ -106,95 +106,142 @@ console.log(getKWdates(currentDay));
 const week = getKWdates(currentDay);
 
 const data = [
-  [
-    {
-      date: week[0],
-      content: "montag",
-    },
-    {
-      date: week[1],
-      content: "dienstag",
-    },
-    {
-      date: week[2],
-      content: "mitwoch",
-    },
-    {
-      date: week[3],
-      content: "donerstag",
-    },
-    {
-      date: week[4],
-      content: "freitag",
-    },
-  ],
+  {
+    date: week[0],
+    content: "montag",
+  },
+  {
+    date: week[1],
+    content: "dienstag",
+  }, //warum kann ich die nicht weg machen ?
+  {
+    date: week[2],
+    content: "mitwoch",
+  },
+  {
+    date: week[3],
+    content: "donerstag",
+  },
+  {
+    date: week[4],
+    content: "freitag",
+  },
 ];
-console.log(week[0]);
-const testWeek = data[0]; // testWeek have not real content
-for (let i = 0; i < testWeek.length; i++) {
-  const element = testWeek[i];
+
+// const testWeek = data[0]; // testWeek have not real content
+const buttonWeekdayTarget = document.querySelector("div.list");
+data.forEach((day) => {
   const buttonWeekdayTemplate =
     document.getElementsByClassName("buttonWeekday")[0];
   const cloneContent = buttonWeekdayTemplate.content
     .cloneNode(true)
     .querySelector("section");
-  cloneContent.textContent = element.date.toLocaleString([], {
+  cloneContent.textContent = day.date.toLocaleString([], {
     weekday: "short",
   });
   cloneContent.addEventListener("click", () => {
-    onBoardChange(element);
+    onBoardChange(day.date);
   });
-  document.querySelector("div.list").appendChild(cloneContent);
-}
+  buttonWeekdayTarget.appendChild(cloneContent);
+});
+
+// week.forEach((day) => {
+//   const buttonWeekdayTemplate =
+//     document.getElementsByClassName("buttonWeekday")[0];
+//   const cloneContent = buttonWeekdayTemplate.content
+//     .cloneNode(true)
+//     .querySelector("section");
+//   cloneContent.textContent = day.toLocaleString([], {
+//     weekday: "short",
+//   });
+//   cloneContent.addEventListener("click", () => {
+//     onBoardChange(day);
+//   });
+//   document.querySelector("div.list").appendChild(cloneContent);
+// });
+
+// for (let i = 0; i < testWeek.length; i++)
+//  {
+//   const element = testWeek[i];
+//   const buttonWeekdayTemplate =
+//     document.getElementsByClassName("buttonWeekday")[0];
+//   const cloneContent = buttonWeekdayTemplate.content
+//     .cloneNode(true)
+//     .querySelector("section");
+//   cloneContent.textContent = element.date.toLocaleString([], {
+//     weekday: "short",
+//   });
+//   cloneContent.addEventListener("click", () => {
+//     onBoardChange(element);
+//   });
+//   document.querySelector("div.list").appendChild(cloneContent);
+// }
 
 const headline = document.querySelector("span.dayShift");
 const dateExit = document.querySelector("span.dayShiftDate");
 const text = document.querySelector("section.text");
 
+// const onBoardChange = (toDay) => {
+//   const namenTag = toDay.toLocaleString([], { weekday: "long" });
+//   headline.textContent = namenTag;
+//   dateExit.textContent = toDay.toLocaleString([], {
+//     day: "2-digit",
+//     month: "long",
+//     year: "numeric",
+//   });
+//   text.textContent = namenTag;
+// };
 const onBoardChange = (toDay) => {
-  headline.textContent = toDay.date.toLocaleString([], { weekday: "long" });
-  dateExit.textContent = toDay.date.toLocaleString([], {
+  const namenTag = toDay.toLocaleString([], { weekday: "long" });
+  headline.textContent = namenTag;
+  dateExit.textContent = toDay.toLocaleString([], {
     day: "2-digit",
     month: "long",
     year: "numeric",
   });
-  text.textContent = toDay.content;
+  text.textContent = namenTag;
 };
-
-console.log(data[0][0].content);
+onBoardChange(currentDay);
 //selector
 const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".todo-button");
 const todoUlList = document.querySelector(".todo-Ul-List");
-const filterTodo = document.querySelector(".filter-todo");
+const filterOption = document.querySelector(".filter-todo");
 //Eventlisener
 todoButton.addEventListener("click", addToDo);
 todoUlList.addEventListener("click", deleteCheck);
-filterOption.addEventListener("click", filterTodo);
+filterOption.addEventListener("change", filterTodo);
 //funktion
 function addToDo(event) {
   // prevent form from submiting
   event.preventDefault();
-  //ToDO DIV
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo");
-  // creat LI
-  const newTodo = document.createElement("li");
-  newTodo.innerText = todoInput.value;
-  newTodo.classList.add("todo-item");
-  todoDiv.appendChild(newTodo);
-  // Ceck MARK Button
-  const completedButton = document.createElement("button");
-  completedButton.innerHTML = '<i class="fas fa-check"></i>';
-  completedButton.classList.add("complete-btn");
-  todoDiv.appendChild(completedButton);
-  // Ceck Trash Button
-  const trashButton = document.createElement("button");
-  trashButton.innerHTML = '<i class="fas fa-trash"></i>';
-  trashButton.classList.add("trash-btn");
-  todoDiv.appendChild(trashButton);
+  const contentTodoListTemplate = todoUlList.querySelector("template");
+  const cloneContentTodoListTemplate = contentTodoListTemplate.content
+    .cloneNode(true)
+    .querySelector("li.todo");
+  cloneContentTodoListTemplate.querySelector(".label").textContent =
+    todoInput.value;
+
+  // //ToDO DIV
+  // const todoDiv = document.createElement("div");
+  // todoDiv.classList.add("todo");
+  // // creat LI
+  // const newTodo = document.createElement("li");
+  // newTodo.innerText = todoInput.value;
+  // newTodo.classList.add("todo-item");
+  // todoDiv.appendChild(newTodo);
+  // // Check MARK Button
+  // const completedButton = document.createElement("button");
+  // completedButton.innerHTML = '<i class="fas fa-check"></i>';
+  // completedButton.classList.add("complete-btn");
+  // todoDiv.appendChild(completedButton);
+  // // Check Trash Button
+  // const trashButton = document.createElement("button");
+  // trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+  // trashButton.classList.add("trash-btn");
+  // todoDiv.appendChild(trashButton);
   //Append to List
-  todoUlList.appendChild(todoDiv);
+  todoUlList.appendChild(cloneContentTodoListTemplate);
   //clear toDo input  Value
   todoInput.value = "";
 }
@@ -210,12 +257,32 @@ function deleteCheck(e) {
     });
   }
   //check mark
-  if (item.classList[0]) {
+  if (item.classList[0] === "complete-btn") {
     const todo = item.parentElement;
     todo.classList.toggle("completed");
   }
 }
 function filterTodo(e) {
   const todos = todoUlList.childNodes;
-  console.log(todos);
+  todos.forEach(function (todo) {
+    switch (e.target.value) {
+      case "all":
+        todo.style.display = "flex";
+        break;
+      case "completed":
+        if (todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+        break;
+      case "uncompleted":
+        if (!todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+        break;
+    }
+  });
 }
