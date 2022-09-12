@@ -203,8 +203,9 @@ function deleteCheck(e) {
   }
 }
 function filterTodo(e) {
-  const todos = todoUlList.childNodes;
+  const todos = Array.from(todoUlList.children);
   todos.forEach(function (todo) {
+    console.log(todo);
     switch (e.target.value) {
       case "all":
         todo.style.display = "flex";
