@@ -81,7 +81,6 @@ function getMonday(d) {
   let day = d.getDay(),
     diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
   const monday = new Date(d.setDate(diff));
-
   return monday;
 }
 
@@ -105,6 +104,7 @@ function getKWdates(date) {
 console.log(getKWdates(currentDay));
 const week = getKWdates(currentDay);
 
+//Datenbank
 const data = [
   {
     date: week[0],
@@ -113,7 +113,7 @@ const data = [
   {
     date: week[1],
     content: "dienstag",
-  }, //warum kann ich die nicht weg machen ?
+  },
   {
     date: week[2],
     content: "mitwoch",
@@ -127,7 +127,9 @@ const data = [
     content: "freitag",
   },
 ];
+const rightNow = currentDay.getDay();
 
+let whichDay = data[rightNow - 1].content;
 // const testWeek = data[0]; // testWeek have not real content
 const buttonWeekdayTarget = document.querySelector("div.list");
 data.forEach((day) => {
@@ -140,14 +142,18 @@ data.forEach((day) => {
     weekday: "short",
   });
   cloneContent.addEventListener("click", () => {
+    whichDay = day.content;
     onBoardChange(day.date);
   });
   buttonWeekdayTarget.appendChild(cloneContent);
+  // add storge for Day
+  check(day.content);
 });
 
 const headline = document.querySelector("span.dayShift");
 const dateExit = document.querySelector("span.dayShiftDate");
 const text = document.querySelector("section.text");
+const parentContainer = document.querySelector("div.todo-container");
 
 const onBoardChange = (toDay) => {
   const namenTag = toDay.toLocaleString([], { weekday: "long" });
@@ -157,24 +163,50 @@ const onBoardChange = (toDay) => {
     month: "long",
     year: "numeric",
   });
-  text.textContent = namenTag;
+  //aktuelle ul hollen
+  const baitList = document.querySelector("ul.todo-Ul-List");
+  console.log("bait list: ", baitList);
+  //holen ul template
+  const contentTodoListTemplate = parentContainer.querySelector(
+    "template.ulTemplate"
+  );
+  const cloneContentTodoListTemplate = contentTodoListTemplate.content
+    .cloneNode(true)
+    .querySelector("ul.todo-Ul-List");
+  console.log("clone template list: ", cloneContentTodoListTemplate);
+
+  // get => template
+  const newList = getTodos(cloneContentTodoListTemplate);
+  console.log("new list: ", newList);
+  // erstezen alt ul template
+  parentContainer.replaceChild(newList, baitList);
 };
 onBoardChange(currentDay);
+
+function check(weekday) {
+  let dayweek = weekday;
+  let dayweekTodo;
+  if (localStorage.getItem(dayweek) === null) {
+    dayweekTodo = [];
+    localStorage.setItem(dayweek, JSON.stringify(dayweekTodo));
+  }
+}
 //selector
 const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
-const todoUlList = document.querySelector(".todo-Ul-List");
 const filterOption = document.querySelector(".filter-todo");
+
 //Eventlisener
-document.addEventListener("DOMContentLoaded", getTodos);
-todoButton.addEventListener("click", addToDo);
-todoUlList.addEventListener("click", deleteCheck);
+// document.addEventListener("DOMContentLoaded", getTodos());
+
 filterOption.addEventListener("change", filterTodo);
+
 //funktion
 function addToDo(event) {
   // prevent form from submiting
   event.preventDefault();
-  const contentTodoListTemplate = todoUlList.querySelector("template");
+  const contentTodoListTemplate = document.querySelector(
+    "ul.todo-Ul-List template"
+  );
   const cloneContentTodoListTemplate = contentTodoListTemplate.content
     .cloneNode(true)
     .querySelector("li.todo");
@@ -183,7 +215,9 @@ function addToDo(event) {
   //add TODO TO LOCALSTORAGE
   saveLocalTodos(todoInput.value);
   //Append to List
-  todoUlList.appendChild(cloneContentTodoListTemplate);
+  document
+    .querySelector("ul.todo-Ul-List")
+    .appendChild(cloneContentTodoListTemplate);
   //clear toDo input  Value
   todoInput.value = "";
 }
@@ -206,9 +240,10 @@ function deleteCheck(e) {
   }
 }
 function filterTodo(e) {
+  const todoUlList = document.querySelector(".todo-Ul-List");
+  console.log(todoUlList);
   const todos = Array.from(todoUlList.children);
   todos.forEach(function (todo) {
-    console.log(todo);
     switch (e.target.value) {
       case "all":
         todo.style.display = "flex";
@@ -230,39 +265,38 @@ function filterTodo(e) {
     }
   });
 }
-function check() {
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
-  return todos;
-}
+// } else {
+//   dayweek = JSON.parse(localStorage.getItem("todos"));
+// }
+// }
 function saveLocalTodos(todo) {
   //CHECK have i items in there?
-  let todos = check();
-  todos.push(todo);
+
+  let toDosFromStorage = JSON.parse(localStorage.getItem(whichDay));
+  toDosFromStorage.push(todo);
   // save the in storage
-  localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem(whichDay, JSON.stringify(toDosFromStorage));
 }
 
-function getTodos() {
+function getTodos(emptyList) {
+  const fillList = emptyList;
+  console.log("get todos:", fillList);
   //CHECK have i items in there?
-  let todos = check();
-  todos.forEach(function (todo) {
-    const contentTodoListTemplate = todoUlList.querySelector("template");
+  let toDosFromStorage = JSON.parse(localStorage.getItem(whichDay));
+  toDosFromStorage.forEach(function (todo) {
+    const contentTodoListTemplate = fillList.querySelector("template");
     const cloneContentTodoListTemplate = contentTodoListTemplate.content
       .cloneNode(true)
       .querySelector("li.todo");
-    cloneContentTodoListTemplate.querySelector(".label").innerText = todo;
+    cloneContentTodoListTemplate.querySelector(".label").textContent = todo;
     //Append to List
-    todoUlList.appendChild(cloneContentTodoListTemplate);
+    fillList.appendChild(cloneContentTodoListTemplate);
   });
+  return fillList;
 }
 function removeLocalTodos(todo) {
-  let todos = check();
+  let toDosFromStorage = JSON.parse(localStorage.getItem(whichDay));
   const todoIndex = todo.children[0].innerText;
-  todos.splice(todos.indexOf(todoIndex), 1);
-  localStorage.setItem("todos", JSON.stringify(todos));
+  toDosFromStorage.splice(toDosFromStorage.indexOf(todoIndex), 1);
+  localStorage.setItem(whichDay, JSON.stringify(toDosFromStorage));
 }

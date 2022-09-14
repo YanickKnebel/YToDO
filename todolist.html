@@ -49,7 +49,7 @@
           <section class="text"></section>
         </section>
         <section class="todo-task">
-          <form>
+          <form onsubmit="addToDo(event)">
             <input
               type="text"
               class="todo-input"
@@ -67,19 +67,22 @@
             </div>
           </form>
           <div class="todo-container">
-            <ul class="todo-Ul-List">
-              <template>
-                <li class="todo">
-                  <div class="label"></div>
-                  <button class="complete-btn">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="trash-btn">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </li>
-              </template>
-            </ul>
+            <ul class="todo-Ul-List"></ul>
+            <template class="ulTemplate">
+              <ul class="todo-Ul-List">
+                <template>
+                  <li class="todo">
+                    <div class="label"></div>
+                    <button onclick="deleteCheck(event)" class="complete-btn">
+                      <i class="fas fa-check"></i>
+                    </button>
+                    <button onclick="deleteCheck(event)" class="trash-btn">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </template>
           </div>
         </section>
       </container>
