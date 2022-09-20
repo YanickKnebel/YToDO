@@ -1,16 +1,24 @@
-body,
-html {
+body {
   height: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--main-col);
+  background: linear-gradient(300deg, #390ad1, #ba00c7);
 }
+
 :root {
-  --main-col: hwb(210 13% 56%);
-  --sub-col: rgb(130, 186, 255);
-  --con-col: rgb(173, 107, 223);
-  --fot-col: rgb(95, 29, 61);
+  --main-col: #390ad1;
+  --sub-col: #5d6cc7;
+  --con-col: #6d00ba;
+  --fot-col: #ba00c7;
+  --tre-col: #c75487;
+  --verlauf: linear-gradient(
+    135deg,
+    rgb(234, 0, 255) 0%,
+    rgb(237, 130, 254) 50%,
+    rgb(255, 255, 255) 100%
+  );
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,8 +40,8 @@ html {
   color: white;
   border: 3px solid #f1f1f1;
   width: 80%;
-  height: 25%;
-  padding: 20px;
+
+  padding: 40px;
   text-align: center;
 }
 
@@ -121,7 +129,7 @@ li:hover a {
 .hobby button {
   text-align: center;
   position: center;
-  background-color: var(--sub-col);
+  background-color: var(--tre-col);
   border: none;
   border-radius: 8px;
   width: 100px;
@@ -280,6 +288,10 @@ form button:hover {
   align-items: center;
   flex-basis: 100%;
 }
+
+.todo-input {
+  color: black;
+}
 .trash-btn,
 .complete-btn {
   background-color: white;
@@ -352,7 +364,7 @@ select {
 }
 .filter-todo {
   padding: 1rem;
-  background: blue;
+  background: var(--sub-col);
 }
 
 /*Button list*/
@@ -387,21 +399,11 @@ select {
 }
 .list :hover {
   scale: 120%;
-  background: linear-gradient(
-    135deg,
-    rgb(234, 0, 255) 0%,
-    rgb(237, 130, 254) 50%,
-    rgb(255, 255, 255) 100%
-  );
+  background: var(--verlauf);
 }
 .active {
   scale: 120%;
-  background: linear-gradient(
-    135deg,
-    rgb(234, 0, 255) 0%,
-    rgb(237, 130, 254) 50%,
-    rgb(255, 255, 255) 100%
-  );
+  background: var(--verlauf);
 }
 .todolist.todo-task {
   flex-direction: column;
@@ -512,8 +514,7 @@ select {
 
 /*IMPRESSUM*/
 footer {
-  margin: 0px 0px 10px 0px;
-  background-color: var(--fot-col);
+  background-color: var(--sub-col);
   text-align: center;
   padding: 40px;
   font-size: 14px;

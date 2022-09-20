@@ -1,5 +1,5 @@
-
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -11,16 +11,16 @@ body, html {
 
 .bg-image {
   background-image: url("bilder/purple-and-blue-cells_1920x1080_xtrafondos.com.jpg");
-  
-  height: 100%; 
+
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .bg-text {
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0, 0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(7px);
   color: white;
   font-weight: bold;
@@ -35,14 +35,13 @@ body, html {
   text-align: center;
 }
 
-h1{
-    font-size: 50px;
-  
+h1 {
+  font-size: 50px;
 }
 /*Navigation*/
 
-.menu-fix{
-  overflow:hidden;
+.menu-fix {
+  overflow: hidden;
   background-color: rgba(92, 50, 176, 0.475);
   backdrop-filter: blur(5px);
   position: fixed;
@@ -53,22 +52,19 @@ h1{
 }
 
 .menu-fix a {
-float: left;
-display:flex;
-color: #f2f2f2;
-text-align: center;
-padding: 14px 16px;
-text-decoration: none;
-
+  float: left;
+  display: flex;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-.menu-fix a:hover{
+.menu-fix a:hover {
   background-color: rgba(0, 0, 0, 0.36);
-
 }
 
-
-.box{
+.box {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -77,43 +73,33 @@ text-decoration: none;
   justify-content: space-between;
 }
 
-.hobby{
+.hobby {
   background-color: rgba(137, 192, 198, 0.832);
   border-radius: 8px;
   margin: 24px;
   padding: 0px 15px 0px 15px;
 }
 
-footer{
-  margin: 20px 10px 10px 10px;
-  margin: 5PX;
+footer {
+  margin: 20px 10px 0px 10px;
   background-color: rgba(54, 57, 58, 0.853);
   text-align: center;
   padding: 20px;
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
-@media only screen and (min-width: 760px){
-  box{
+@media only screen and (min-width: 760px) {
+  box {
     background-color: green;
   }
 }
 
-@media only screen and (max-width: 759px){
-.box{
-  flex-direction: column;
+@media only screen and (max-width: 759px) {
+  .box {
+    flex-direction: column;
+  }
 }
-}
-
-
-
-
-
-
-
-
 
 img {
   vertical-align: middle;
@@ -220,7 +206,6 @@ h1 {
   margin: 8px -16px;
 }
 
-
 /* Add padding BETWEEN each column */
 .row,
 .row > .column {
@@ -233,7 +218,7 @@ h1 {
   width: 25%;
 }
 
-/* Clear floats after rows */ 
+/* Clear floats after rows */
 .row:after {
   content: "";
   display: table;
@@ -244,5 +229,4 @@ h1 {
 .content {
   background-color: white;
   padding: 10px;
-} 
-
+}
